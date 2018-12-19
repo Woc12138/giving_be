@@ -6,10 +6,10 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql+pymysql://user:ye123456@' + \
+        'mysql+pymysql://user:XXXXXXXX@' + \
         'zhouyingsasa.xyz/test?charset=utf8'
     SQLALCHEMY_BINDS = {
-        "passport_user": 'mysql+pymysql://passport_user:+WIscsL5@' +
+        "passport_user": 'mysql+pymysql://passport_user:XXXXXXXX@' +
         'ncuhomev5.mysql.rds.aliyuncs.com/passport?charset=utf8',
         }
     SECRET_KEY = 'hard to guess'
