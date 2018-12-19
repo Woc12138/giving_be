@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from app.resources.apply import Apply
-from app.model.models import activity
+from app.model.models import activity, actUser
 from flask import g
 from app import auth
 
@@ -29,16 +29,23 @@ class Activity(Resource):
     @auth.login_required
     def get(self):
         user = g.user
+        username = g.user.username
         a = Apply()
         data = a.first_login(user)
         if not data:
             return self.failed()
         activities = activity.query.all()
+        doing_activity = actUser.query.filter_by(username=username).all()
         data = {
             u"status": 1,
             u"message": "存入用户数据成功",
-            u"data": []
+            u"data": [],
+            u"doing_act_id": []
         }
+        for act_id in doing_activity:
+            data[u"doing_act_id"].append({
+                u"id": act_id.activity_id,
+            })
         for act in activities:
             data[u"data"].append(
                 {
